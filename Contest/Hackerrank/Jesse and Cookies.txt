@@ -1,0 +1,68 @@
+//Smailov Nurzhigit
+#include <bits/stdc++.h>
+ 
+using namespace std;
+	  
+#define pb push_back
+#define pf push_front
+#define ppb pop_back
+#define ppf pop_front
+#define mp make_pair 
+#define all(x) x.begin(), x.end()
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+deque<ll> d,d2,d3;
+ll x,sum,sum2,sum3,n2,n3;
+
+ll bs(deque<ll> d, ll t, ll l, ll r){
+	if(r - l >= 2){
+		ll mid = (r + l)/2;
+		if(d[mid] == t){
+			return mid;
+		}
+		else if(d[mid] > t){
+			return bs(d, t, 0, mid - 1);
+		}
+		else{
+			return bs(d, t, mid + 1, r);
+		}
+	}
+	else if(r - l == 1){
+		if(d[r] != t || d[l] > t){
+			l--;
+			return l;
+		}
+	}
+	return 0;
+}
+
+int main(){
+	ll n, k;
+	cin >> n >> k;
+	ll a[n];
+	std::deque<ll>::iterator it;
+	for(ll i = 0;i < n;i++){
+		cin >> x;
+		d.pb(x);
+	}
+	ll cnt=0;
+	while(true){
+		if(d[0] < k){
+			ll t = d[0] + 2 * d[1];
+			d.ppf(); 
+			d.ppf();
+			ll l = bs(d, t, 0, d.size());
+			it = d.begin() + l;
+			d.insert(it, t);
+			cnt++;
+		}
+		else{
+			break;
+		}
+	}
+	cout << cnt;
+    return 0;
+}
+

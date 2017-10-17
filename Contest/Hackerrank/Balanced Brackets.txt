@@ -1,0 +1,66 @@
+//Smailov Nurzhigit
+#include <bits/stdc++.h>
+ 
+using namespace std;
+
+#define ll long long
+#define pb push_back
+#define mp make_pair
+#define N 1000001
+string s,z;
+ll n,k,m;
+int main(){
+	cin >> k;
+	while(k--){
+		cin >> s;
+		for(int i = 0; i < s.size(); i++){
+		    if(s[i] == '('){
+		        n++;
+		        z += '(';
+		    }
+		    else if(s[i] == '{'){
+		        n++;
+		        z += '{';
+		    }
+		    else if(s[i] == '['){
+		        n++;
+		        z += '[';
+		    }
+		    else if(s[i] == ')'){
+		        if(z[n - 1] == '('){
+		            z.erase(n - 1, 1);
+		            n--;
+		        }
+		        else{
+		            m++;
+		            break;
+		        }
+		    }
+		    else if(s[i] == '}'){
+		        if(z[n - 1] == '{'){
+		            z.erase(n - 1, 1);
+		            n--;
+		            }
+		            else
+		            {
+		            m++;
+		            break;
+		        }
+		    }
+		    else if(s[i] == ']'){
+		        if(z[n - 1] == '['){
+		            z.erase(n - 1, 1);
+		            n--;
+		        }
+		        else{
+		        m++;
+		        break;
+				}
+			}
+		}
+		if(!m && !n) cout << "YES" << endl;
+		else cout << "NO" << endl;
+		s.clear(); n = 0;m = 0;
+		z.clear();
+	}
+}
